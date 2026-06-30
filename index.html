@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>遗嘱准备清单 - 在线表单</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        
+        input, textarea, button {
+            -webkit-user-select: text;
+            user-select: text;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", "PingFang SC", sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #1a3a6b;
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #2d5a8d;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .intro {
+            background: #f0f4fa;
+            padding: 15px;
+            border-left: 4px solid #1a3a6b;
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        
+        .section-title {
+            background: #1a3a6b;
+            color: white;
+            padding: 12px 15px;
+            margin-top: 30px;
+            margin-bottom: 18px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+        
+        .section-subtitle {
+            background: #2d5a8d;
+            color: white;
+            padding: 10px 15px;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 13px;
+            color: #333;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 8px 12px;
+            font-size: 13px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+        
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #1a3a6b;
+            box-shadow: 0 0 4px rgba(26, 58, 107, 0.2);
+        }
+        
+        .form-textarea {
+            resize: vertical;
+            min-height: 80px;
+            line-height: 1.5;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .note {
+            background: #f0f4fa;
+            border: 1px solid #d0ddf5;
+            padding: 10px 12px;
+            margin-bottom: 12px;
+            font-size: 12px;
+            border-radius: 4px;
+            line-height: 1.5;
+            color: #666;
+        }
+        
+        .important-note {
+            background: #fff4e8;
+            border-left: 4px solid #e8a000;
+            padding: 10px 12px;
+            margin: 12px 0;
+            font-size: 12px;
+            color: #8b5f00;
+            line-height: 1.5;
+        }
+        
+        .add-button {
+            background: #1a3a6b;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 10px;
+            font-weight: bold;
+            width: 100%;
+        }
+        
+        .add-button:active {
+            background: #132a52;
+            transform: scale(0.98);
+        }
+        
+        .remove-button {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 8px;
+            font-weight: bold;
+        }
+        
+        .remove-button:active {
+            background: #bb2d3b;
+        }
+        
+        .item-block {
+            background: #f9f9f9;
+            padding: 15px;
+            border-left: 3px solid #1a3a6b;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+        
+        .page-break {
+            page-break-after: always;
+            margin: 50px 0;
+            padding-top: 50px;
+            border-top: 2px solid #f0f0f0;
+        }
+        
+        .part2-section {
+            background: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            border-left: 3px solid #2d5a8d;
+        }
+        
+        .part2-title {
+            color: #1a3a6b;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .part2-item {
+            font-size: 12px;
+            line-height: 1.8;
+            color: #333;
+            margin-left: 15px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 20px;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        .btn-download {
+            background: #1a3a6b;
+            color: white;
+        }
+        
+        .btn-download:active {
+            background: #132a52;
+        }
+        
+        .btn-email {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-email:active {
+            background: #218838;
+        }
+        
+        .contact-section {
+            background: #1a3a6b;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 8px;
+            margin-top: 40px;
+            line-height: 2;
+        }
+        
+        .contact-section strong {
+            display: block;
+            font-size: 18px;
+            margin: 15px 0;
+        }
+        
+        .contact-section .phone {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        
+        .footer-notice {
+            text-align: center;
+            color: #999;
+            font-size: 11px;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .btn {
+                max-width: 100%;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            .add-button {
+                font-size: 14px;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>遗嘱准备清单</h1>
+        <p class="subtitle">为想立遗嘱但还没开始的你准备的</p>
+        
+        <div class="intro">
+            这份清单帮助你整理所有信息。下面是需要你填写的部分，请逐一完成。
+        </div>
+        
+        <!-- ===== PART 1 - FORM ===== -->
+        <form id="willForm">
+            <div class="section-title">📋 第一部分：立遗嘱时要准备的资料</div>
+            
+            <div class="section-subtitle">✓ 你自己的信息</div>
+            <div class="form-group">
+                <label class="form-label">全名</label>
+                <input type="text" class="form-input" name="personal_name" placeholder="输入你的全名">
+            </div>
+            <div class="form-group">
+                <label class="form-label">身份证</label>
+                <input type="text" class="form-input" name="personal_id" placeholder="输入你的IC号码">
+            </div>
+            <div class="form-group">
+                <label class="form-label">现在的住址</label>
+                <input type="text" class="form-input" name="personal_address" placeholder="输入你的住址">
+            </div>
+            
+            <div class="section-subtitle">✓ 执行人的信息</div>
+            <div class="note">（执行人是在你去世后，负责管理和分配你的遗产的人。可以选择1-4个执行人单独或共同执行）</div>
+            <div id="executorsContainer"></div>
+            <button type="button" class="add-button" id="addExecutorBtn">+ 添加执行人</button>
+            
+            <div class="section-subtitle">✓ 监护人（如果你有未成年子女）</div>
+            <div class="note">（监护人是照顾你未成年子女的人。可以选择1-2个监护人）</div>
+            <div id="guardiansContainer"></div>
+            <button type="button" class="add-button" id="addGuardianBtn">+ 添加监护人</button>
+            
+            <div class="section-subtitle">✓ 受益人信息</div>
+            <div class="note">（受益人是会得到你的遗产的人）</div>
+            <div id="beneficiariesContainer"></div>
+            <button type="button" class="add-button" id="addBeneficiaryBtn">+ 添加受益人</button>
+            
+            <div class="section-subtitle">✓ 你的资产清单</div>
+            
+            <div style="margin-top: 15px;"><strong style="color: #1a3a6b;">🏠 房产</strong></div>
+            <div id="propertiesContainer"></div>
+            <button type="button" class="add-button" id="addPropertyBtn">+ 添加房产</button>
+            
+            <div style="margin-top: 20px;"><strong style="color: #1a3a6b;">🚗 汽车/摩托车</strong></div>
+            <div id="vehiclesContainer"></div>
+            <button type="button" class="add-button" id="addVehicleBtn">+ 添加车辆</button>
+            
+            <div style="margin-top: 20px;"><strong style="color: #1a3a6b;">🏦 银行账户</strong></div>
+            <div id="banksContainer"></div>
+            <button type="button" class="add-button" id="addBankBtn">+ 添加银行账户</button>
+            
+            <div style="margin-top: 20px;"><strong style="color: #1a3a6b;">💰 投资、股票、基金</strong></div>
+            <div id="investmentsContainer"></div>
+            <button type="button" class="add-button" id="addInvestmentBtn">+ 添加投资账户</button>
+            
+            <div class="form-group" style="margin-top: 20px;">
+                <label class="form-label"><strong style="color: #1a3a6b;">📊 EPF</strong></label>
+                <input type="text" class="form-input" name="epf_account" placeholder="输入EPF账户号码（如需要）">
+            </div>
+            
+            <div class="form-group" style="margin-top: 15px;">
+                <label class="form-label"><strong style="color: #1a3a6b;">💍 珠宝、古董、金器</strong></label>
+                <textarea class="form-textarea" name="jewelry" placeholder="例如：祖母的玉镯，保险箱，留给女儿李美"></textarea>
+            </div>
+            
+            <div class="form-group" style="margin-top: 15px;">
+                <label class="form-label"><strong style="color: #1a3a6b;">🏢 企业、店铺、生意</strong></label>
+                <input type="text" class="form-input" name="business_name" placeholder="企业名称">
+                <input type="text" class="form-input" style="margin-top: 8px;" name="business_number" placeholder="登记号码或账号">
+                <div class="important-note" style="margin-top: 8px;">备注：只有Sdn Bhd的企业才能继承。Sole proprietor的生意只能wind up。</div>
+            </div>
+            
+            <div class="section-subtitle">✓ Residuary Estate（剩余资产）</div>
+            <div class="form-group">
+                <label class="form-label">Residuary Estate应该给谁？</label>
+                <input type="text" class="form-input" name="residuary_estate" placeholder="例如：所有剩余资产平分给我的三个孩子">
+            </div>
+            
+            <div class="section-subtitle">✓ 继承到的财产</div>
+            <div class="form-group">
+                <textarea class="form-textarea" name="inherited_assets" placeholder="例如：从父亲继承的房产，应该留给大儿子"></textarea>
+            </div>
+            
+            <div class="section-subtitle">✓ 葬礼偏好</div>
+            <div class="form-group">
+                <label class="form-label">土葬还是火葬？有宗教仪式吗？其他特殊要求？</label>
+                <textarea class="form-textarea" name="funeral_notes" placeholder="输入任何葬礼偏好或特殊要求"></textarea>
+            </div>
+        </form>
+        
+        <!-- ===== PART 2 - VIEW ONLY ===== -->
+        <div class="page-break"></div>
+        
+        <div class="section-title">📎 第二部分：遗嘱写好后，自己在家准备和保管的资料</div>
+        
+        <div class="intro">
+            这些资料不需要在立遗嘱时给律师，但要和遗嘱一起保管好。这是提醒你要准备什么，不需要直接填写。
+        </div>
+        
+        <div class="part2-section">
+            <div class="part2-title">✓ 重要资产文件的副本</div>
+            <div class="part2-item">• 屋契副本（photocopy）<br>• 车卡副本（photocopy）<br>• 银行账户：银行名称、账户号码<br>• 股票/投资基金证书副本<br>• 任何其他重要资产的证明副本</div>
+        </div>
+        
+        <div class="part2-section">
+            <div class="part2-title">✓ 珠宝、古董、金器的证明资料</div>
+            <div class="part2-item">• 物品的照片（最好是清晰的多角度照片）<br>• 购买收据或鉴定证书<br>• 列出每件物品的清单，说明要留给谁</div>
+        </div>
+        
+        <div class="part2-section">
+            <div class="part2-title">✓ 保险单</div>
+            <div class="part2-item">• 保险公司名称<br>• 保单号码<br>• 保单上指定的受益人是谁<br>• 人寿保险、医疗保险、车保，有的话都要列出</div>
+        </div>
+        
+        <div class="part2-section">
+            <div class="part2-title">✓ 你的债务清单</div>
+            <div class="part2-item">• 房屋贷款：银行名称、还欠金额<br>• 汽车贷款：银行名称、还欠金额<br>• 信用卡债务：银行名称、还欠金额<br>• 其他贷款：比如向朋友借的钱、医疗债务等、还欠金额</div>
+        </div>
+        
+        <div class="part2-section">
+            <div class="part2-title">✓ 联名或共同资产</div>
+            <div class="part2-item">• 哪些资产是联名的？<br>• 是什么类型的联名？（比如联名账户、共同房产）</div>
+        </div>
+        
+        <div class="part2-section">
+            <div class="part2-title">✓ 账户信息和登录信息</div>
+            <div class="part2-item">这些密码可以放在只有受益人知道的地方：<br>• 电子邮件账户：邮箱地址、密码<br>• 网上银行：用户名、密码<br>• 社交媒体账户：Facebook、微信等的账号和密码<br>• 购物账户：Lazada、Shopee等<br>• 其他重要账户：PayPal、支付宝、车险、医疗平台等</div>
+        </div>
+        
+        <div class="part2-section">
+            <div class="part2-title">✓ 执行人需要联系的人</div>
+            <div class="part2-item">• 你的律师：名字和电话号码<br>• （如果没有认识的律师，可以联系 Mr Loo 0183801719）<br>• 会计师/税务顾问<br>• 保险经纪人<br>• 其他关键人物：比如合伙人、房东等</div>
+        </div>
+        
+        <div class="part2-section">
+            <div class="part2-title">✓ 特别注意</div>
+            <div class="part2-item">如果你已经买了富贵山庄，或者有其他新的资产或计划，记得把它包括进遗嘱。</div>
+        </div>
+        
+        <!-- ===== ACTION BUTTONS ===== -->
+        <div class="action-buttons">
+            <button type="button" class="btn btn-download" id="downloadBtn">
+                📥 下载为文本
+            </button>
+            <button type="button" class="btn btn-email" id="emailBtn">
+                📧 发送给我
+            </button>
+        </div>
+        
+        <div style="text-align: center; color: #666; font-size: 12px; margin-top: 15px;">
+            点击"下载为文本"保存文件，或点击"发送给我"直接提交到邮箱。
+        </div>
+        
+        <!-- Contact Section -->
+        <div class="contact-section">
+            <strong>准备好了吗？</strong>
+            <p>如果你填好了上面的信息，那我们就可以准备开始了。</p>
+            <p>我会陪你一起规划，然后交给律师帮你起草。</p>
+            <strong>嘉嘉</strong>
+            <div class="phone">☎ 012-261 0443</div>
+        </div>
+        
+        <div style="text-align: center; font-size: 14px; line-height: 18px; margin-top: 25px; color: #666;">
+            <p style="margin-bottom: 10px;">这份清单只是帮助你整理思路的工具。</p>
+            <p>立遗嘱的法律部分会和专业律师仔细讨论。</p>
+        </div>
+        
+        <div style="text-align: center; font-size: 16px; color: #1a3a6b; margin-top: 20px; margin-bottom: 40px;">
+            💙 为你的家人做出负责任的选择
+        </div>
+        
+        <div class="footer-notice">
+            这只是参考，不构成任何法律建议
+        </div>
+    </div>
+    
+    <script>
+        // Add executor
+        function addExecutor() {
+            const container = document.getElementById('executorsContainer');
+            const executorCount = container.querySelectorAll('.item-block').length;
+            
+            if (executorCount >= 4) {
+                alert('最多只能添加4个执行人');
+                return;
+            }
+            
+            const id = Date.now();
+            const executorNum = executorCount + 1;
+            const html = `
+                <div class="item-block">
+                    <div class="form-group">
+                        <label class="form-label">执行人 ${executorNum} - 全名</label>
+                        <input type="text" class="form-input" name="executor_name_${id}" placeholder="输入名字">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">执行人 ${executorNum} - 身份证</label>
+                        <input type="text" class="form-input" name="executor_id_${id}" placeholder="输入IC号码">
+                    </div>
+                    <button type="button" class="remove-button">删除</button>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', html);
+            
+            const btn = container.lastElementChild.querySelector('.remove-button');
+            btn.addEventListener('click', function() {
+                this.parentElement.remove();
+            });
+        }
+        
+        // Add guardian
+        function addGuardian() {
+            const container = document.getElementById('guardiansContainer');
+            const guardianCount = container.querySelectorAll('.item-block').length;
+            
+            if (guardianCount >= 2) {
+                alert('最多只能添加2个监护人');
+                return;
+            }
+            
+            const id = Date.now();
+            const guardianNum = guardianCount + 1;
+            const html = `
+                <div class="item-block">
+                    <div class="form-group">
+                        <label class="form-label">监护人 ${guardianNum} - 全名</label>
+                        <input type="text" class="form-input" name="guardian_name_${id}" placeholder="输入名字">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">监护人 ${guardianNum} - 身份证</label>
+                        <input type="text" class="form-input" name="guardian_id_${id}" placeholder="输入IC号码">
+                    </div>
+                    <button type="button" class="remove-button">删除</button>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', html);
+            
+            const btn = container.lastElementChild.querySelector('.remove-button');
+            btn.addEventListener('click', function() {
+                this.parentElement.remove();
+            });
+        }
+        
+        // Add beneficiary
+        function addBeneficiary() {
+            const container = document.getElementById('beneficiariesContainer');
+            const id = Date.now();
+            const html = `
+                <div class="item-block">
+                    <div class="form-group">
+                        <label class="form-label">受益人 - 全名</label>
+                        <input type="text" class="form-input" name="ben_name_${id}" placeholder="输入受益人名字">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">受益人 - 身份证</label>
+                        <input type="text" class="form-input" name="ben_id_${id}" placeholder="输入IC号码">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">应该得到多少？</label>
+                        <input type="text" class="form-input" name="ben_share_${id}" placeholder="例如：50% 或 RM100,000">
+                    </div>
+                    <button type="button" class="remove-button">删除</button>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', html);
+            
+            const btn = container.lastElementChild.querySelector('.remove-button');
+            btn.addEventListener('click', function() {
+                this.parentElement.remove();
+            });
+        }
+        
+        // Add property
+        function addProperty() {
+            const container = document.getElementById('propertiesContainer');
+            const id = Date.now();
+            const html = `
+                <div class="item-block">
+                    <div class="form-group">
+                        <label class="form-label">屋契号码</label>
+                        <input type="text" class="form-input" name="prop_title_${id}" placeholder="输入屋契号码">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">房产地址</label>
+                        <input type="text" class="form-input" name="prop_address_${id}" placeholder="输入房产地址">
+                    </div>
+                    <button type="button" class="remove-button">删除</button>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', html);
+            
+            const btn = container.lastElementChild.querySelector('.remove-button');
+            btn.addEventListener('click', function() {
+                this.parentElement.remove();
+            });
+        }
+        
+        // Add vehicle
+        function addVehicle() {
+            const container = document.getElementById('vehiclesContainer');
+            const id = Date.now();
+            const html = `
+                <div class="item-block">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">车牌号码</label>
+                            <input type="text" class="form-input" name="veh_plate_${id}" placeholder="例如：ABD1234">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">车型号</label>
+                            <input type="text" class="form-input" name="veh_model_${id}" placeholder="例如：Toyota Camry 2020">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Chassis Number</label>
+                            <input type="text" class="form-input" name="veh_chassis_${id}">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Engine Number</label>
+                            <input type="text" class="form-input" name="veh_engine_${id}">
+                        </div>
+                    </div>
+                    <button type="button" class="remove-button">删除</button>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', html);
+            
+            const btn = container.lastElementChild.querySelector('.remove-button');
+            btn.addEventListener('click', function() {
+                this.parentElement.remove();
+            });
+        }
+        
+        // Add bank
+        function addBank() {
+            const container = document.getElementById('banksContainer');
+            const id = Date.now();
+            const html = `
+                <div class="item-block">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">银行名称</label>
+                            <input type="text" class="form-input" name="bank_name_${id}" placeholder="例如：CIMB">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">账户号码</label>
+                            <input type="text" class="form-input" name="bank_account_${id}" placeholder="输入账户号码">
+                        </div>
+                    </div>
+                    <button type="button" class="remove-button">删除</button>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', html);
+            
+            const btn = container.lastElementChild.querySelector('.remove-button');
+            btn.addEventListener('click', function() {
+                this.parentElement.remove();
+            });
+        }
+        
+        // Add investment
+        function addInvestment() {
+            const container = document.getElementById('investmentsContainer');
+            const id = Date.now();
+            const html = `
+                <div class="item-block">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">机构名称</label>
+                            <input type="text" class="form-input" name="inv_name_${id}" placeholder="例如：Maybank Investment">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">账户号码</label>
+                            <input type="text" class="form-input" name="inv_account_${id}" placeholder="输入账户号码">
+                        </div>
+                    </div>
+                    <button type="button" class="remove-button">删除</button>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', html);
+            
+            const btn = container.lastElementChild.querySelector('.remove-button');
+            btn.addEventListener('click', function() {
+                this.parentElement.remove();
+            });
+        }
+        
+        // Download as text
+        function downloadTxt() {
+            const form = document.getElementById('willForm');
+            const formData = new FormData(form);
+            
+            let content = '=== 遗嘱准备清单 ===\n\n';
+            for (let [key, value] of formData.entries()) {
+                if (value) {
+                    content += `${key}: ${value}\n`;
+                }
+            }
+            
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = '遗嘱准备清单.txt';
+            link.click();
+        }
+        
+        // Submit form via email
+        function submitForm() {
+            const form = document.getElementById('willForm');
+            const formData = new FormData(form);
+            
+            let emailContent = '=== 遗嘱准备清单 ===\n\n';
+            for (let [key, value] of formData.entries()) {
+                if (value) {
+                    emailContent += `${key}: ${value}\n`;
+                }
+            }
+            
+            const payload = {
+                email: 'gladyschong.eam@gmail.com',
+                message: emailContent
+            };
+            
+            fetch('https://formspree.io/f/xyzppqke', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).then(response => {
+                if (response.ok) {
+                    alert('✓ 已发送到嘉嘉的邮箱！');
+                } else {
+                    alert('发送失败，请重试。');
+                }
+            }).catch(error => {
+                alert('发送出错。请检查网络连接。');
+            });
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('addExecutorBtn').addEventListener('click', addExecutor);
+            document.getElementById('addGuardianBtn').addEventListener('click', addGuardian);
+            document.getElementById('addBeneficiaryBtn').addEventListener('click', addBeneficiary);
+            document.getElementById('addPropertyBtn').addEventListener('click', addProperty);
+            document.getElementById('addVehicleBtn').addEventListener('click', addVehicle);
+            document.getElementById('addBankBtn').addEventListener('click', addBank);
+            document.getElementById('addInvestmentBtn').addEventListener('click', addInvestment);
+            document.getElementById('downloadBtn').addEventListener('click', downloadTxt);
+            document.getElementById('emailBtn').addEventListener('click', submitForm);
+            
+            // Add defaults
+            addExecutor();
+            addGuardian();
+            addBeneficiary();
+            addProperty();
+            addVehicle();
+            addBank();
+        });
+    </script>
+</body>
+</html>
